@@ -1,0 +1,222 @@
+<!-- ================= NPCH TRANSPARENT TOP BAR ================= -->
+<style>
+/* FORCE HIDE ANY EXISTING HEADER / MENU */
+header,
+nav,
+.navbar,
+.site-header,
+#masthead,
+.wp-site-blocks header,
+.elementor-header,
+.elementor-location-header,
+[data-elementor-type="header"]{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  overflow:hidden !important;
+}
+
+/* TOP BAR */
+#npch-topbar{
+ position:fixed;top:0;left:0;right:0;
+ height:70px;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 18px;
+ background:transparent !important;
+ color:#111;
+ z-index:999999;
+ transition:.3s;
+}
+
+/* LOGO */
+#npch-logo img{
+ height:42px;
+ border-radius:10px;
+}
+
+/* MENU BUTTON */
+#npch-menu-btn{
+ width:46px;height:46px;
+ border-radius:14px;
+ border:none;
+ cursor:pointer;
+ position:relative;
+ background:rgba(255,255,255,.9);
+ box-shadow:0 8px 25px rgba(0,0,0,.25);
+ transition:.3s;
+}
+#npch-menu-btn i{
+ position:absolute;
+ left:50%;top:50%;
+ width:22px;height:2.5px;
+ background:#111;
+ border-radius:2px;
+ transform:translate(-50%,-50%);
+}
+#npch-menu-btn i:before,
+#npch-menu-btn i:after{
+ content:"";
+ position:absolute;
+ width:22px;height:2.5px;
+ background:#111;
+ border-radius:2px;
+ left:0;
+}
+#npch-menu-btn i:before{top:-7px}
+#npch-menu-btn i:after{top:7px}
+
+/* X ICON */
+#npch-menu-btn.active i{background:transparent}
+#npch-menu-btn.active i:before{
+ transform:rotate(45deg) translate(5px,5px);
+}
+#npch-menu-btn.active i:after{
+ transform:rotate(-45deg) translate(5px,-5px);
+}
+
+/* OVERLAY */
+#npch-overlay{
+ position:fixed;inset:0;
+ background:rgba(0,0,0,.45);
+ opacity:0;
+ pointer-events:none;
+ transition:.3s;
+ z-index:999998;
+}
+#npch-overlay.active{
+ opacity:1;
+ pointer-events:auto;
+}
+
+/* PANEL */
+#npch-panel{
+ position:fixed;
+ top:0;right:-360px;
+ width:340px;height:100%;
+ background:linear-gradient(180deg,#0f172a,#020617);
+ padding:18px;
+ transition:.4s;
+ z-index:999999;
+ color:#fff;
+ overflow-y:auto;
+}
+#npch-panel.active{right:0}
+
+/* CLOSE */
+#npch-close{
+ text-align:right;
+ font-size:22px;
+ cursor:pointer;
+ margin-bottom:12px;
+}
+
+/* LINKS */
+.npch-link{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:14px 16px;
+ border-radius:14px;
+ text-decoration:none;
+ color:#fff;
+ background:rgba(255,255,255,.08);
+ margin-bottom:10px;
+ transition:.3s;
+ cursor:pointer;
+}
+.npch-link:hover{background:#4f46e5}
+
+/* SUBMENU */
+.npch-submenu{
+ max-height:0;
+ overflow:hidden;
+ transition:max-height .35s ease;
+ margin-left:8px;
+}
+.npch-submenu.open{max-height:600px}
+.npch-submenu a{
+ display:flex;
+ gap:10px;
+ padding:12px 14px;
+ margin:8px 0;
+ border-radius:12px;
+ text-decoration:none;
+ color:#fff;
+ background:rgba(255,255,255,.06);
+ font-size:14px;
+}
+
+/* PAGE OFFSET */
+body{padding-top:70px!important}
+</style>
+
+<!-- TOP BAR -->
+<div id="npch-topbar">
+ <div id="npch-logo">
+  <img src="https://npch.publit.io/file/file-0000000089bc71faaead90a6786424b1-1024x683.png">
+ </div>
+
+ <button id="npch-menu-btn" onclick="openMenu()">
+  <i></i>
+ </button>
+</div>
+
+<div id="npch-overlay" onclick="closeMenu()"></div>
+
+<!-- PANEL -->
+<div id="npch-panel">
+ <div id="npch-close" onclick="closeMenu()">✕</div>
+
+ <a class="npch-link" href="https://npch.in">🏠 Home</a>
+ <a class="npch-link" href="https://npch.in/about">ℹ️ About</a>
+ <a class="npch-link" href="https://npch.in/services">🛠 Services</a>
+ <a class="npch-link" href="https://npch.in/join-us">🤝 Work With Us</a>
+
+ <div class="npch-link toggle">📢 Sponsored</div>
+ <div class="npch-submenu">
+  <a href="https://npch.in/240-2/">📝 Ad Diarywala Registration</a>
+ </div>
+
+ <div class="npch-link toggle">🧰 Tools</div>
+ <div class="npch-submenu">
+  <a href="https://npch.in/qr-generator/">💳 Payment QR Create</a>
+  <a href="https://npch.in/crypto-updates/">📈 Crypto Updates</a>
+  <a href="https://npch.in/qr-code-scanner/">📷 QR Scanner</a>
+  <a href="https://npch.in/payment-link-generator/">🔗 Payment Link Create</a>
+  <a href="https://npch.in/url-to-qr-generator/">🌐 URL to QR</a>
+  <a href="https://npch.in/binary-morse-code/">🔡 Binary & Morse Code</a>
+  <a href="https://npch.in/image-compressor/">🖼 Image Size Reduce</a>
+  <a href="https://npch.in/image-to-pdf-converter/">📄 Image to PDF</a>
+  <a href="https://npch.in/loan-emi-calculator/">🏦 EMI Calculator</a>
+ </div>
+
+ <a class="npch-link" href="https://npch.in/privacy-policy-2/">🔐 Privacy Policy</a>
+</div>
+
+<script>
+const panel=document.getElementById('npch-panel');
+const overlay=document.getElementById('npch-overlay');
+const menuBtn=document.getElementById('npch-menu-btn');
+
+function openMenu(){
+ panel.classList.add('active');
+ overlay.classList.add('active');
+ menuBtn.classList.add('active');
+}
+function closeMenu(){
+ panel.classList.remove('active');
+ overlay.classList.remove('active');
+ menuBtn.classList.remove('active');
+}
+
+// close when clicking link
+document.querySelectorAll('#npch-panel a').forEach(a=>{
+ a.onclick=closeMenu;
+});
+
+// submenu toggle
+document.querySelectorAll('.toggle').forEach(t=>{
+ t.onclick=()=>t.nextElementSibling.classList.toggle('open');
+});
+</script>
+<!-- ================= END ================= -->
